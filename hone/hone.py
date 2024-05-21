@@ -1,5 +1,7 @@
 from hone.utils import csv_utils
 import copy
+from utils.visualizer import InteractiveTreeVisualizer
+import matplotlib.pyplot as plt
 
 class Hone:
     DEFAULT_DELIMITERS = [",", "_", " "]
@@ -12,13 +14,16 @@ class Hone:
     '''
     Perform CSV to nested JSON conversion and return resulting JSON.
     '''
-    def convert(self, csv_filepath, schema = None):
+    def convert(self, csv_filepath, schema = None, visualize = False):
         self.set_csv_filepath(csv_filepath)
         column_names = self.csv.get_column_names()
         data = self.csv.get_data_rows()
         column_schema = schema
         if not column_schema:
             column_schema = self.generate_full_structure(column_names)
+        if visualize:
+            visualizer = InteractiveTreeVisualizer(column_schema)
+            plt.show()
         json_struct = self.populate_structure_with_data(column_schema, column_names, data)
         return json_struct
         

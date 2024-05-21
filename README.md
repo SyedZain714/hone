@@ -60,7 +60,7 @@ optional_arguments = {
 }
 Hone = hone.Hone(**optional_arguments)
 schema = Hone.get_schema('path/to/input.csv')  # nested JSON schema for input.csv
-result = Hone.convert('path/to/input.csv', schema=schema)  # final structure, nested according to schema
+result = Hone.convert('path/to/input.csv', schema=schema, visualize=True)  # final structure, nested according to schema and pass true to visualize the graph of the schema
 ```
 
 ## Examples
